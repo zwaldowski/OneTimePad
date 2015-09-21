@@ -8,8 +8,6 @@
 
 import CommonCryptoShim.Private
 
-private typealias CCCryptor = CCCryptorRef
-
 /// This interface provides access to a number of symmetric encryption
 /// algorithms. Symmetric encryption algorithms come in two "flavors" -  block
 /// ciphers, and stream ciphers. Block ciphers process data in discrete chunks
@@ -43,9 +41,12 @@ private typealias CCCryptor = CCCryptorRef
 ///
 /// A given `Cryptor` can only be used by one thread at a time; multiple threads
 /// can use safely different `Cryptor`s at the same time.
-public struct Cryptor {
+public final class Cryptor: CCPointer {
     
-    private struct AlgorithmConfiguration {
+    typealias RawCryptor = CCCryptorRef
+    private(set) var rawPointer = RawCryptor()
+    
+    private struct Configuration {
         let mode: CCMode
         let algorithm: CCAlgorithm
         let padding: CCPadding
@@ -54,16 +55,18 @@ public struct Cryptor {
         let numberOfRounds: Int32?
     }
     
-    private let ccCryptor: CCPointer
-    
-    private static func createCryptor(operation op: CCOperation, configuration c: AlgorithmConfiguration, key: UnsafeBufferPointer<Void>, cryptor: UnsafeMutablePointer<CCCryptor>) -> CCStatus {
-        return CCCryptorCreateWithMode(op, c.mode, c.algorithm, c.padding, c.iv, key.baseAddress, key.count, c.tweak?.baseAddress ?? nil, c.tweak?.count ?? 0, c.numberOfRounds ?? 0, [], cryptor)
+    private static func createCryptor(operation op: CCOperation, configuration c: Configuration, key: UnsafeBufferPointer<Void>, inout cryptor: RawCryptor) throws {
+        try call {
+            CCCryptorCreateWithMode(op, c.mode, c.algorithm, c.padding, c.iv, key.baseAddress, key.count, c.tweak?.baseAddress ?? nil, c.tweak?.count ?? 0, c.numberOfRounds ?? 0, [], &cryptor)
+        }
     }
     
-    private init(operation op: CCOperation, configuration c: AlgorithmConfiguration, key: UnsafeBufferPointer<Void>) throws {
-        ccCryptor = try CCPointer(destructor: CCCryptorRelease) {
-            Cryptor.createCryptor(operation: op, configuration: c, key: key, cryptor: $0)
-        }
+    private init(operation op: CCOperation, configuration c: Configuration, key: UnsafeBufferPointer<Void>) throws {
+        try Cryptor.createCryptor(operation: op, configuration: c, key: key, cryptor: &rawPointer)
+    }
+    
+    deinit {
+        CCCryptorRelease(rawPointer)
     }
 
     /// Process (encrypt or decrypt) some data. The result, if any, is written
@@ -105,7 +108,7 @@ public struct Cryptor {
     ///     no state has been lost.
     /// - seealso: outputLengthForInputLength(_:finalizing:)
     public func update(data: UnsafeBufferPointer<Void>, inout output: UnsafeMutableBufferPointer<Void>!) throws -> Int {
-        return try ccCryptor.call {
+        return try call {
             CCCryptorUpdate($0, data.baseAddress, data.count, output?.baseAddress ?? nil, output?.count ?? 0, $1)
         }
     }
@@ -135,7 +138,7 @@ public struct Cryptor {
     ///     the wrong key during decryption.
     /// - seealso: outputLengthForInputLength(_:finalizing:)
     public func finalize(inout output: UnsafeMutableBufferPointer<Void>) throws -> Int {
-        return try ccCryptor.call {
+        return try call {
             CCCryptorFinal($0, output.baseAddress, output.count, $1)
         }
     }
@@ -153,7 +156,7 @@ public struct Cryptor {
     ///   - `CryptoError.InvalidParameters` to indicate an invalid IV.
     ///   - `CryptoError.Unimplemented` for stream ciphers.
     public func reset(iv: UnsafePointer<Void> = nil) throws {
-        return try ccCryptor.call {
+        return try call {
             CCCryptorReset($0, iv)
         }
     }
@@ -182,7 +185,7 @@ public struct Cryptor {
     /// - returns: The maximum buffer space need to perform `update` and
     ///   optionally `finalize`.
     public func outputLengthForInputLength(inputLength: Int, finalizing: Bool = false) -> Int {
-        return CCCryptorGetOutputLength(ccCryptor.rawValue, inputLength, finalizing)
+        return CCCryptorGetOutputLength(rawPointer, inputLength, finalizing)
     }
     
 }
@@ -288,7 +291,7 @@ public extension Cryptor.Algorithm {
 
 private extension Cryptor.Padding {
     
-    private var rawValue: CCPadding {
+    var rawValue: CCPadding {
         switch self {
         case .None: return .None
         case .PKCS7: return .PKCS7
@@ -297,7 +300,7 @@ private extension Cryptor.Padding {
     
 }
 
-private extension Cryptor.AlgorithmConfiguration {
+private extension Cryptor.Configuration {
     
     init(_ alg: CCAlgorithm, mode: Cryptor.Mode, padding: Cryptor.Padding) {
         let pad = padding.rawValue
@@ -320,7 +323,6 @@ private extension Cryptor.AlgorithmConfiguration {
     }
     
     init(_ conf: Cryptor.Algorithm) {
-        
         switch conf {
         case .RC4:
             self.init(mode: .RC4, algorithm: .RC4, padding: .None, iv: nil, tweak: nil, numberOfRounds: nil)
@@ -349,8 +351,8 @@ public extension Cryptor {
     /// - throws:
     ///   - `CryptoError.InvalidParameters`
     ///   - `CryptoError.CouldNotAllocateMemory`
-    init(forEncryptionWithAlgorithm alg: Algorithm, key: UnsafeBufferPointer<Void>) throws {
-        try self.init(operation: .Encrypt, configuration: AlgorithmConfiguration(alg), key: key)
+    convenience init(forEncryption algorithm: Algorithm, key: UnsafeBufferPointer<Void>) throws {
+        try self.init(operation: .Encrypt, configuration: Configuration(algorithm), key: key)
     }
     
     /// Create a context for decryption.
@@ -361,8 +363,8 @@ public extension Cryptor {
     /// - throws:
     ///   - `CryptoError.InvalidParameters`
     ///   - `CryptoError.CouldNotAllocateMemory`
-    init(forDecryptionWithAlgorithm alg: Algorithm, key: UnsafeBufferPointer<Void>) throws {
-        try self.init(operation: .Decrypt, configuration: AlgorithmConfiguration(alg), key: key)
+    convenience init(forDecryption algorithm: Algorithm, key: UnsafeBufferPointer<Void>) throws {
+        try self.init(operation: .Decrypt, configuration: Configuration(algorithm), key: key)
     }
     
 }
@@ -374,12 +376,9 @@ public extension Cryptor {
         case BufferTooSmall(Int)
     }
     
-    private static func cryptWithAlgorithm(operation op: CCOperation, configuration c: AlgorithmConfiguration, key: UnsafeBufferPointer<Void>, input: UnsafeBufferPointer<Void>, inout output: UnsafeMutableBufferPointer<Void>!) throws -> Int {
-        var cryptor = CCCryptor()
-        try CCPointer.call {
-            Cryptor.createCryptor(operation: op, configuration: c, key: key, cryptor: &cryptor)
-        }
-        
+    private static func cryptWithAlgorithm(operation op: CCOperation, configuration c: Configuration, key: UnsafeBufferPointer<Void>, input: UnsafeBufferPointer<Void>, inout output: UnsafeMutableBufferPointer<Void>!) throws -> Int {
+        var cryptor = RawCryptor()
+        try createCryptor(operation: op, configuration: c, key: key, cryptor: &cryptor)
         defer {
             CCCryptorRelease(cryptor)
         }
@@ -395,7 +394,7 @@ public extension Cryptor {
         }
         
         do {
-            try CCPointer.call {
+            try call {
                 CCCryptorUpdate(cryptor, input.baseAddress, input.count, dataOut, dataOutAvailable, &updateLen)
             }
         } catch CryptoError.BufferTooSmall {
@@ -406,7 +405,7 @@ public extension Cryptor {
         dataOutAvailable -= updateLen
         
         do {
-            try CCPointer.call {
+            try call {
                 CCCryptorFinal(cryptor, dataOut, dataOutAvailable, &finalLen)
             }
         } catch CryptoError.BufferTooSmall {
@@ -436,7 +435,7 @@ public extension Cryptor {
     ///   - `CryptoError.MisalignedMemory` if the number of bytes provided
     ///     is not an integral multiple of the algorithm's block size.
     static func encryptWithAlgorithm(algorithm alg: Algorithm, key: UnsafeBufferPointer<Void>, input: UnsafeBufferPointer<Void>, inout output: UnsafeMutableBufferPointer<Void>!) throws -> Int {
-        return try cryptWithAlgorithm(operation: .Encrypt, configuration: AlgorithmConfiguration(alg), key: key, input: input, output: &output)
+        return try cryptWithAlgorithm(operation: .Encrypt, configuration: Configuration(alg), key: key, input: input, output: &output)
     }
     
     /// Stateless, one-shot decryption.
@@ -461,7 +460,7 @@ public extension Cryptor {
     ///   - `CryptoError.DecodingFailure` Indicates improperly formatted
     ///     ciphertext or a "wrong key" error.
     static func decryptWithAlgorithm(algorithm alg: Algorithm, key: UnsafeBufferPointer<Void>, input: UnsafeBufferPointer<Void>, inout output: UnsafeMutableBufferPointer<Void>!) throws -> Int {
-        return try cryptWithAlgorithm(operation: .Decrypt, configuration: AlgorithmConfiguration(alg), key: key, input: input, output: &output)
+        return try cryptWithAlgorithm(operation: .Decrypt, configuration: Configuration(alg), key: key, input: input, output: &output)
     }
     
 }
