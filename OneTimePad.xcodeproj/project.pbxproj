@@ -1,0 +1,334 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB2945CA1B9CFC99009DD1D0 /* OneTimePad.h in Headers */ = {isa = PBXBuildFile; fileRef = DB2945C91B9CFC99009DD1D0 /* OneTimePad.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB2945F01B9CFFC5009DD1D0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2945EF1B9CFFC5009DD1D0 /* Error.swift */; settings = {ASSET_TAGS = (); }; };
+		DB2945F41B9D0067009DD1D0 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = DB2945DF1B9CFE7C009DD1D0 /* CommonCryptoError.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		DB2945F51B9D0067009DD1D0 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = DB2945E01B9CFE7C009DD1D0 /* CommonCryptor.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		DB2946411B9D41F7009DD1D0 /* Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2946401B9D41F7009DD1D0 /* Cryptor.swift */; settings = {ASSET_TAGS = (); }; };
+		DB2946431B9D46B3009DD1D0 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2946421B9D46B3009DD1D0 /* Base.swift */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DB2945C61B9CFC99009DD1D0 /* OneTimePad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OneTimePad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB2945C91B9CFC99009DD1D0 /* OneTimePad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneTimePad.h; sourceTree = "<group>"; };
+		DB2945CB1B9CFC99009DD1D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB2945DF1B9CFE7C009DD1D0 /* CommonCryptoError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonCryptoError.h; path = ../CommonCryptoShim/CommonCryptoError.h; sourceTree = "<group>"; };
+		DB2945E01B9CFE7C009DD1D0 /* CommonCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonCryptor.h; path = ../CommonCryptoShim/CommonCryptor.h; sourceTree = "<group>"; };
+		DB2945EF1B9CFFC5009DD1D0 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		DB29463E1B9D3DD2009DD1D0 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = CommonCryptoShim/module.modulemap; sourceTree = SOURCE_ROOT; };
+		DB29463F1B9D3DD2009DD1D0 /* module.private.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.private.modulemap; path = CommonCryptoShim/module.private.modulemap; sourceTree = SOURCE_ROOT; };
+		DB2946401B9D41F7009DD1D0 /* Cryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptor.swift; sourceTree = "<group>"; };
+		DB2946421B9D46B3009DD1D0 /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB2945C21B9CFC99009DD1D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB2945BC1B9CFC99009DD1D0 = {
+			isa = PBXGroup;
+			children = (
+				DB29463D1B9D3D5B009DD1D0 /* CommonCryptoShim */,
+				DB2945C81B9CFC99009DD1D0 /* OneTimePad */,
+				DB2945C71B9CFC99009DD1D0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB2945C71B9CFC99009DD1D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB2945C61B9CFC99009DD1D0 /* OneTimePad.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB2945C81B9CFC99009DD1D0 /* OneTimePad */ = {
+			isa = PBXGroup;
+			children = (
+				DB2945C91B9CFC99009DD1D0 /* OneTimePad.h */,
+				DB2946421B9D46B3009DD1D0 /* Base.swift */,
+				DB2946401B9D41F7009DD1D0 /* Cryptor.swift */,
+				DB2945EF1B9CFFC5009DD1D0 /* Error.swift */,
+				DB71CA761B9D7C1F004BB068 /* Supporting Files */,
+			);
+			path = OneTimePad;
+			sourceTree = "<group>";
+		};
+		DB29463D1B9D3D5B009DD1D0 /* CommonCryptoShim */ = {
+			isa = PBXGroup;
+			children = (
+				DB2945DF1B9CFE7C009DD1D0 /* CommonCryptoError.h */,
+				DB2945E01B9CFE7C009DD1D0 /* CommonCryptor.h */,
+				DB71CA751B9D7C15004BB068 /* Supporting Files */,
+			);
+			path = CommonCryptoShim;
+			sourceTree = "<group>";
+		};
+		DB71CA751B9D7C15004BB068 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB29463E1B9D3DD2009DD1D0 /* module.modulemap */,
+				DB29463F1B9D3DD2009DD1D0 /* module.private.modulemap */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB71CA761B9D7C1F004BB068 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB2945CB1B9CFC99009DD1D0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DB2945C31B9CFC99009DD1D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2945CA1B9CFC99009DD1D0 /* OneTimePad.h in Headers */,
+				DB2945F51B9D0067009DD1D0 /* CommonCryptor.h in Headers */,
+				DB2945F41B9D0067009DD1D0 /* CommonCryptoError.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DB2945C51B9CFC99009DD1D0 /* OneTimePad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB2945CE1B9CFC99009DD1D0 /* Build configuration list for PBXNativeTarget "OneTimePad" */;
+			buildPhases = (
+				DB2945C11B9CFC99009DD1D0 /* Sources */,
+				DB2945C21B9CFC99009DD1D0 /* Frameworks */,
+				DB2945C31B9CFC99009DD1D0 /* Headers */,
+				DB2945C41B9CFC99009DD1D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneTimePad;
+			productName = OneTimePad;
+			productReference = DB2945C61B9CFC99009DD1D0 /* OneTimePad.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB2945BD1B9CFC99009DD1D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Zachary Waldowski";
+				TargetAttributes = {
+					DB2945C51B9CFC99009DD1D0 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = DB2945C01B9CFC99009DD1D0 /* Build configuration list for PBXProject "OneTimePad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB2945BC1B9CFC99009DD1D0;
+			productRefGroup = DB2945C71B9CFC99009DD1D0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB2945C51B9CFC99009DD1D0 /* OneTimePad */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB2945C41B9CFC99009DD1D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB2945C11B9CFC99009DD1D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2946431B9D46B3009DD1D0 /* Base.swift in Sources */,
+				DB2945F01B9CFFC5009DD1D0 /* Error.swift in Sources */,
+				DB2946411B9D41F7009DD1D0 /* Cryptor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DB2945CC1B9CFC99009DD1D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DB2945CD1B9CFC99009DD1D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DB2945CF1B9CFC99009DD1D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = OneTimePad/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-lsystem";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.OneTimePad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WARNING_LDFLAGS = "";
+			};
+			name = Debug;
+		};
+		DB2945D01B9CFC99009DD1D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = OneTimePad/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-lsystem";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.OneTimePad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/";
+				WARNING_LDFLAGS = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB2945C01B9CFC99009DD1D0 /* Build configuration list for PBXProject "OneTimePad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB2945CC1B9CFC99009DD1D0 /* Debug */,
+				DB2945CD1B9CFC99009DD1D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB2945CE1B9CFC99009DD1D0 /* Build configuration list for PBXNativeTarget "OneTimePad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB2945CF1B9CFC99009DD1D0 /* Debug */,
+				DB2945D01B9CFC99009DD1D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB2945BD1B9CFC99009DD1D0 /* Project object */;
+}
