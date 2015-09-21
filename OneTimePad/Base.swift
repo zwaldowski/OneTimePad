@@ -19,15 +19,19 @@ protocol CCPointer {
     var rawPointer: COpaquePointer { get }
 }
 
+func cc_call(@noescape fn: Void -> CCStatus) throws {
+    switch fn() {
+    case CCSuccess:
+        break
+    case let error:
+        throw CryptoError(error)
+    }
+}
+
 extension CCPointer {
     
     static func call(@noescape fn: Void -> CCStatus) throws {
-        switch fn() {
-        case CCSuccess:
-            break
-        case let error:
-            throw CryptoError(error)
-        }
+        try cc_call(fn)
     }
     
     func call(@noescape fn: COpaquePointer -> CCStatus) throws {
