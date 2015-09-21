@@ -1,4 +1,5 @@
 explicit module CommonCryptoShim.Private {
     header "CommonCryptoError.h"
     header "CommonCryptor.h"
+    header "CommonRandom.h"
 }

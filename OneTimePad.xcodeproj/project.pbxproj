@@ -13,6 +13,8 @@
 		DB2945F51B9D0067009DD1D0 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = DB2945E01B9CFE7C009DD1D0 /* CommonCryptor.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DB2946411B9D41F7009DD1D0 /* Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2946401B9D41F7009DD1D0 /* Cryptor.swift */; settings = {ASSET_TAGS = (); }; };
 		DB2946431B9D46B3009DD1D0 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2946421B9D46B3009DD1D0 /* Base.swift */; settings = {ASSET_TAGS = (); }; };
+		DBC652121BAF796500C40139 /* CommonRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = DBC652111BAF796500C40139 /* CommonRandom.h */; settings = {ASSET_TAGS = (); }; };
+		DBC652141BAF796E00C40139 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC652131BAF796E00C40139 /* Random.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		DB29463F1B9D3DD2009DD1D0 /* module.private.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.private.modulemap; path = CommonCryptoShim/module.private.modulemap; sourceTree = SOURCE_ROOT; };
 		DB2946401B9D41F7009DD1D0 /* Cryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptor.swift; sourceTree = "<group>"; };
 		DB2946421B9D46B3009DD1D0 /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+		DBC652111BAF796500C40139 /* CommonRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRandom.h; sourceTree = "<group>"; };
+		DBC652131BAF796E00C40139 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,7 @@
 				DB2946421B9D46B3009DD1D0 /* Base.swift */,
 				DB2946401B9D41F7009DD1D0 /* Cryptor.swift */,
 				DB2945EF1B9CFFC5009DD1D0 /* Error.swift */,
+				DBC652131BAF796E00C40139 /* Random.swift */,
 				DB71CA761B9D7C1F004BB068 /* Supporting Files */,
 			);
 			path = OneTimePad;
@@ -73,6 +78,7 @@
 			children = (
 				DB2945DF1B9CFE7C009DD1D0 /* CommonCryptoError.h */,
 				DB2945E01B9CFE7C009DD1D0 /* CommonCryptor.h */,
+				DBC652111BAF796500C40139 /* CommonRandom.h */,
 				DB71CA751B9D7C15004BB068 /* Supporting Files */,
 			);
 			path = CommonCryptoShim;
@@ -105,6 +111,7 @@
 				DB2945CA1B9CFC99009DD1D0 /* OneTimePad.h in Headers */,
 				DB2945F51B9D0067009DD1D0 /* CommonCryptor.h in Headers */,
 				DB2945F41B9D0067009DD1D0 /* CommonCryptoError.h in Headers */,
+				DBC652121BAF796500C40139 /* CommonRandom.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC652141BAF796E00C40139 /* Random.swift in Sources */,
 				DB2946431B9D46B3009DD1D0 /* Base.swift in Sources */,
 				DB2945F01B9CFFC5009DD1D0 /* Error.swift in Sources */,
 				DB2946411B9D41F7009DD1D0 /* Cryptor.swift in Sources */,
