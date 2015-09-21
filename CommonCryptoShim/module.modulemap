@@ -1,3 +1,4 @@
 module CommonCryptoShim {
     export *
+    link "system"
 }
