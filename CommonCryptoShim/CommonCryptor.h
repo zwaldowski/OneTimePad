@@ -8,6 +8,8 @@
 
 CF_ASSUME_NONNULL_BEGIN
 
+typedef CCStatus CCCryptorStatus;
+
 typedef struct _CCCryptor *CCCryptorRef;
 
 typedef CF_ENUM(uint32_t, CCOperation) {

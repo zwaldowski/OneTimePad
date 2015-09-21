@@ -8,20 +8,44 @@
 
 import CommonCryptoShim.Private
 
-public enum CryptoError: Int32, ErrorType {
+public struct CryptoError: ErrorType {
+    
+    private let rawValue: CCStatus
+    
+    init(_ rawValue: CCStatus) {
+        self.rawValue = rawValue
+    }
+    
     /// Illegal parameter value.
-    case InvalidParameters      = -4300
+    static let InvalidParameters      = CryptoError(kCCParamError)
     /// Insufficent buffer provided for specified operation.
-    case BufferTooSmall         = -4301
+    static let BufferTooSmall         = CryptoError(kCCBufferTooSmall)
     /// Memory allocation failure.
-    case CouldNotAllocateMemory = -4302
+    static let CouldNotAllocateMemory = CryptoError(kCCMemoryFailure)
     /// Input size was not aligned properly.
-    case MisalignedMemory       = -4303
+    static let MisalignedMemory       = CryptoError(kCCAlignmentError)
     /// Input data did not decode or decrypt properly.
-    case DecodingFailure        = -4304
+    static let DecodingFailure        = CryptoError(kCCDecodeError)
     /// Function not implemented for the current algorithm.
-    case Unimplemented          = -4305
-    case Overflow               = -4306
-    case RNGFailure             = -4307
+    static let Unimplemented          = CryptoError(kCCUnimplemented)
+    static let Overflow               = CryptoError(kCCOverflow)
+    static let RNGFailure             = CryptoError(kCCRNGFailure)
+    
 }
 
+extension CryptoError: Hashable {
+    
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+    
+}
+
+public func ==(lhs: CryptoError, rhs: CryptoError) -> Bool {
+    return lhs.rawValue == rhs.rawValue
+}
+
+public func ~=(match: CryptoError, error: ErrorType) -> Bool {
+    guard let error = error as? CryptoError else { return false }
+    return error == match
+}

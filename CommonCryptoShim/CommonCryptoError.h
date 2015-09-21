@@ -6,9 +6,14 @@
 #import <CoreFoundation/CoreFoundation.h>
 
 CF_ASSUME_NONNULL_BEGIN
+
+typedef int32_t CCStatus;
+
+enum: CCStatus {
+    CCSuccess = 0
+};
     
-typedef CF_ENUM(int32_t, CCStatus) {
-    kCCSuccess          = 0,
+enum: CCStatus {
     kCCParamError       = -4300,
     kCCBufferTooSmall   = -4301,
     kCCMemoryFailure    = -4302,
@@ -18,8 +23,6 @@ typedef CF_ENUM(int32_t, CCStatus) {
     kCCOverflow         = -4306,
     kCCRNGFailure       = -4307,
 };
-
-typedef CCStatus CCCryptorStatus;
 
 #define _CC_UNIMPLEMENTED __OS_AVAILABILITY_MSG(macosx,unavailable,"Unimplemented for now (not included)") __OS_AVAILABILITY_MSG(ios,unavailable,"Unimplemented for now (not included)")
 

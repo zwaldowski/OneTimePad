@@ -30,10 +30,10 @@ final class CCPointer {
     
     static func call(@noescape fn: Void -> CCStatus) throws {
         switch fn() {
-        case .CCSuccess:
+        case CCSuccess:
             break
         case let error:
-            throw CryptoError(rawValue: error.rawValue)!
+            throw CryptoError(error)
         }
     }
     
